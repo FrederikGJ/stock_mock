@@ -35,12 +35,37 @@ monthly_closing_prices.rename(columns={'Close': 'Closing Price on First Day of M
 st.write(monthly_closing_prices)
 
 st.subheader("Ændring i procent fra første dag i første måned til første dat i seneste måned i datasættet")
-# Display percentage change in price from the first month of the data set to the latest month
+
+# Calculate the percentage change
 percentage_change = ((monthly_closing_prices.iloc[-1] - monthly_closing_prices.iloc[0]) / monthly_closing_prices.iloc[0]) * 100
-st.write(f"Percentage change in price from the first month to the latest month: {percentage_change.values[0]:.2f}%") 
+percentage_change_value = percentage_change.values[0]
+# Display the algebraic formula
+st.latex(r"\text{Percentage Change} = \left( \frac{\text{Latest Closing Price} - \text{First Closing Price}}{\text{First Closing Price}} \right) \times 100")
+# Display the numeric calculation
+st.latex(f"\\text{{Percentage Change}} = \\left( \\frac{{{monthly_closing_prices.iloc[-1].values[0]:.2f} - {monthly_closing_prices.iloc[0].values[0]:.2f}}}{{{monthly_closing_prices.iloc[0].values[0]:.2f}}} \\right) \\times 100 = {percentage_change_value:.2f}\\%")
+# Display the result with st.latex
+st.latex(f"\\text{{Percentage change in price from the first month to the latest month: }} {percentage_change_value:.2f}\\%")
 
-# Display the percentage change for the last 4 years
-st.subheader("Procentvis ændring for de sidste 4 år")
-percentage_change_4_years = ((monthly_closing_prices.iloc[-1] - monthly_closing_prices.iloc[-48]) / monthly_closing_prices.iloc[-48]) * 100
-st.write(f"Percentage change in price from the first month to the latest month: {percentage_change_4_years.values[0]:.2f}%")
+# Subheader for overall percentage change
+st.subheader("Ændring i procent for forskellige tidsperioder")
 
+# Calculate the percentage changes
+percentage_changes = {
+    "Period": ["Since First Month", "Last 4 Years", "Last 2 Years", "Last Year", "Last 6 Months"],
+    "Percentage Change": [
+        ((monthly_closing_prices.iloc[-1] - monthly_closing_prices.iloc[0]) / monthly_closing_prices.iloc[0] * 100).values[0],
+        ((monthly_closing_prices.iloc[-1] - monthly_closing_prices.iloc[-48]) / monthly_closing_prices.iloc[-48] * 100).values[0],
+        ((monthly_closing_prices.iloc[-1] - monthly_closing_prices.iloc[-24]) / monthly_closing_prices.iloc[-24] * 100).values[0],
+        ((monthly_closing_prices.iloc[-1] - monthly_closing_prices.iloc[-12]) / monthly_closing_prices.iloc[-12] * 100).values[0],
+        ((monthly_closing_prices.iloc[-1] - monthly_closing_prices.iloc[-6]) / monthly_closing_prices.iloc[-6] * 100).values[0],
+    ]
+}
+
+# Create a DataFrame
+percentage_change_df = pd.DataFrame(percentage_changes)
+
+# Format the 'Percentage Change' column to round to two decimal places
+percentage_change_df['Percentage Change'] = percentage_change_df['Percentage Change'].map('{:.2f}%'.format)
+
+# Display the table in the Streamlit app using st.write
+st.write(percentage_change_df)
