@@ -2,7 +2,7 @@
 
 Denne app skal blandt andet analysere finansiel data og lave grafer ud fra det.
 
-## App environment setup (sådan kører du programmet lokalt på din computer - husk at have python installeret på din computer):
+### App environment setup (sådan kører du programmet lokalt på din computer - husk at have python installeret på din computer):
 
 ### Start virtuelt miljø på mac/linux, man skal være i terminalen inde i projektmappen(fx vscode terminalen):
 ```bash
