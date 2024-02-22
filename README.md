@@ -28,7 +28,7 @@ python -m venv env
 ```bash
 deactivate
 ```
-### herefter skriver man: 
+### Når miljøet er sat op skriver man: 
 
 ```bash
 streamlit run app.py 
