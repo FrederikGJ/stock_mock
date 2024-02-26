@@ -16,6 +16,10 @@ omxc25 = yf.Ticker("^OMXC25")  # This might need adjustment if the ticker symbol
 # Get historical data
 hist_data = omxc25.history(period="max")
 
+st.write(hist_data.tail())
+
+#st.write(hist_data.
+
 # Display the closing prices
 st.line_chart(hist_data['Close'])
 
@@ -67,6 +71,8 @@ percentage_change_df['Percentage Change'] = percentage_change_df['Percentage Cha
 # Display the table in the Streamlit app using st.write
 st.write(percentage_change_df)
 
+st.divider()
+
 #### s&p 500
 
 st.subheader("S&P 500 Index Closing Prices Since 1928")
@@ -76,6 +82,8 @@ sp500 = yf.Ticker("^GSPC")  # Correct ticker symbol for S&P 500
 
 # Get historical data
 hist_data = sp500.history(period="max")
+
+st.write(hist_data.tail())
 
 # Display the closing prices
 st.line_chart(hist_data['Close'])
