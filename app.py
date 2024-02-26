@@ -72,7 +72,7 @@ st.write(percentage_change_df)
 
 #### s&p 500
 
-st.subheader("S&P 500 Index Closing Prices Since 2000")
+st.subheader("S&P 500 Index Closing Prices Since 1928")
 
 # Fetch the S&P 500 data
 sp500 = yf.Ticker("^GSPC")  # Correct ticker symbol for S&P 500
@@ -80,11 +80,11 @@ sp500 = yf.Ticker("^GSPC")  # Correct ticker symbol for S&P 500
 # Get historical data
 hist_data = sp500.history(period="max")
 
-# Filter data from 2000 onwards
-hist_data_since_2000 = hist_data.loc['2000-01-01':]
+# Filter data from max age to today
+# hist_data_since_2000 = hist_data.loc[max(hist_data.index.year)-20:]
 
 # Display the closing prices
-st.line_chart(hist_data_since_2000['Close'])
+st.line_chart(hist_data['Close'])
 
 # Resample the data to get the first entry of each month and round to 2 decimal places
 monthly_data = hist_data_since_2000.resample('MS').first().round(2)
