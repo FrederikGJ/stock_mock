@@ -17,13 +17,13 @@ omxc25 = yf.Ticker("^OMXC25")  # This might need adjustment if the ticker symbol
 hist_data = omxc25.history(period="max")
 
 # Filter data from 2000 onwards
-hist_data_since_2000 = hist_data.loc['2000-01-01':]
+hist_data = hist_data.loc['2000-01-01':]
 
 # Display the closing prices
-st.line_chart(hist_data_since_2000['Close'])
+st.line_chart(hist_data['Close'])
 
 # Resample the data to get the first entry of each month and round to 2 decimal places
-monthly_data = hist_data_since_2000.resample('MS').first().round(2)
+monthly_data = hist_data.resample('MS').first().round(2)
 
 # Create a DataFrame with just the 'Close' prices
 monthly_closing_prices = monthly_data[['Close']].round(2)
@@ -80,14 +80,11 @@ sp500 = yf.Ticker("^GSPC")  # Correct ticker symbol for S&P 500
 # Get historical data
 hist_data = sp500.history(period="max")
 
-# Filter data from max age to today
-# hist_data_since_2000 = hist_data.loc[max(hist_data.index.year)-20:]
-
 # Display the closing prices
 st.line_chart(hist_data['Close'])
 
 # Resample the data to get the first entry of each month and round to 2 decimal places
-monthly_data = hist_data_since_2000.resample('MS').first().round(2)
+monthly_data = hist_data.resample('MS').first().round(2)
 
 # Create a DataFrame with just the 'Close' prices
 monthly_closing_prices = monthly_data[['Close']].round(2)
