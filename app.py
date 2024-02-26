@@ -16,9 +16,6 @@ omxc25 = yf.Ticker("^OMXC25")  # This might need adjustment if the ticker symbol
 # Get historical data
 hist_data = omxc25.history(period="max")
 
-# Filter data from 2000 onwards
-hist_data = hist_data.loc['2000-01-01':]
-
 # Display the closing prices
 st.line_chart(hist_data['Close'])
 
